@@ -1,14 +1,25 @@
 import SearchableLayout from "@/components/searchable-layout";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
+import books from '@/mock/books.json'
+import BookItem from "@/components/book-item";
+import { GetServerSidePropsContext } from "next";
+
+export const getServerSideProps = async(context : GetServerSidePropsContext) => {
+	console.log(context)
+	
+	return{
+		props: {},
+	}
+};
 
 export default function Page() {
-	const router = useRouter();
-
-	const { q } = router.query;
-
   return (
-    <h1>search {q}</h1>
+    <div>
+			{books.map((book) => (
+				<BookItem key={book.id} {...book} />
+			))}
+		</div>
   );
 }
 
